@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: rawdata
+    database: RAWDATA
+    schema: DBT_CUSTOMERS
+    tables:
+      - name: customers
+        identifier: CUSTOMERS
+      - name: orders
+        identifier: ORDERS
+      - name: orderitems
+        identifier: ORDERITEMS
+      - name: employees
+        identifier: EMPLOYEES
