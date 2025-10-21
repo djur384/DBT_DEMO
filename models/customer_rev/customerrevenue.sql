@@ -1,13 +1,12 @@
 {{ config(materialized='table') }}
 
-SELECT
-    os.customer_id,
-    c.customer_name,
-    SUM(os.order_count) AS total_orders,
-    SUM(os.revenue)     AS total_revenue
-FROM {{ ref('orders_fact') }} os
-JOIN {{ ref('customer_stg') }} c
-  ON os.customer_id = c.customer_id
-GROUP BY
-    os.customer_id,
-    c.customer_name
+select
+  o.customer_id,
+  c.customer_name,
+  count(distinct o.order_id) as total_orders,
+  sum(oi.total_price)        as total_revenue
+from {{ ref('orders_stg') }} o
+join {{ ref('orderitems_stg') }} oi on o.order_id = oi.order_id
+join {{ ref('customer_stg') }}  c  on o.customer_id = c.customer_id
+group by o.customer_id, c.customer_name
+
