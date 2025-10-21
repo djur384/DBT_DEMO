@@ -1,5 +1,3 @@
-{{ config(materialized='table') }}
-
 WITH CTE AS (
 
 select 
@@ -14,7 +12,6 @@ HOUR(TO_TIMESTAMP(STARTED_AT)) AS HOUR_STARTED_AT,
 
 
 {{get_season('STARTED_AT')}} AS SEASON_OF_YEAR
-
 
 
 
